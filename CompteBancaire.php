@@ -59,14 +59,15 @@ class compteBancaire {
     }
 
     public function virement(CompteBancaire $compteDestination, float $montant): void {
-      
-            if ($this->solde >= $montant) {
-                $this->solde -= $montant;
-            } else {
-                echo "Solde insuffisant !";
-            
+        if ($this->solde >= $montant) {
+            $this->debiter($montant);
+            $compteDestination->crediter($montant);
+        } else {
+            echo "Solde insuffisant !";
         }
     }
+
+    
 }
 
 ?>
