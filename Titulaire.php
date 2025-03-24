@@ -48,11 +48,33 @@ public function calculerAge(): int {
     $age = $aujourdhui->diff($this->dateNaissance)->y;
     return $age;
 }
-public function __toString(): string {
-    return $this->prenom . "  " . $this->nom ."  (" . $this->calculerAge() . "  ans " .$this->ville; 
-}
+public function afficherTitulaire(): void {
+echo "<h2>Informations du titulaire 1 :</h2>";
+echo $this . "<br>";
 
+foreach ($this->getComptes() as $compte) {
+    echo "Titulaire : " . $compte->getTitulaire() . "<br>";
+}
+}
+ // les information des titulaires avec leurs comptes respectif
+    public function afficherInformations(): void {
+        echo "<h2>Informations du titulaire :</h2>";
+        echo "<strong>Nom :</strong> " . $this->nom . "<br>";
+        echo "<strong>Prénom :</strong> " . $this->prenom . "<br>";
+        echo "<strong>Âge :</strong> " . $this->calculerAge() . " ans<br>";
+        echo "<strong>Ville :</strong> " . $this->ville . "<br>";
+        echo "<strong>Comptes :</strong><br>";
+        echo "<ul>";
+        foreach ($this->comptes as $compte) {
+            echo "<li>" . $compte->getLibelle() . " : " . $compte->getSolde() . " " . $compte->getDevise() . "</li>";
+        }
+        echo "</ul>";
+    }
+    public function __toString(): string {
+        return $this->nom . "  " . $this->prenom ."  ( " . $this->calculerAge() . "  ans " .$this->ville . ")";
+    }
 }
 
 
 ?>
+
